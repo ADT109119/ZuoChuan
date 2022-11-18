@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件編輯器</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/CSS.css">
+    <link rel="stylesheet" href="../css/RWD.css">
+
+    <script src="functions.js"></script>
+
+</head>
+<body>
+
+    <div class="backgroundFileter"></div>
+
+    <div class="container table-responsive" style="text-align: center;">
+        <table class="table">
+            <thead>
+                <th>事件ID</th>
+                <th>春秋原文</th>
+                <th>左傳</th>
+                <th>白話文</th>
+                <th>時間</th>
+                <th>關聯國家</th>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+        </table>
+        
+    </div>
+
+    <div style="text-align: center;">
+        <button type="button" class="btn btn-dark" onclick="addNewEvent();">+</button>
+        <button type="button" class="btn btn-dark" onclick="eventDataSave();">💾Save</button>
+    </div>
+
+    <script src="js/bootstrap.js"></script>
+
+    <script>
+        loadEvent('tbody')
+    </script>
+</body>
+</html>

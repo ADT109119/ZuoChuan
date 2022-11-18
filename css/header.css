@@ -1,0 +1,171 @@
+@import url("Animation.css");
+
+:root{
+    --buttonBackground: #525252;
+}
+
+.header{
+    top: 0;
+    height: 70px;
+    line-height: 70px;
+    background: var(--headerBackgroundColor);
+    border-bottom: 1px solid #000000;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
+.header .logo{
+    text-decoration: none;
+    color: var(--headerTextColor);
+    flex: 1;
+    padding: 0 2rem;
+    max-width: 50%;
+}
+
+.header .select{
+    list-style: none;
+    display: inline-flex;
+    padding: 0;
+    margin: 0 2rem;
+}
+
+.header .select a{
+    text-decoration: none;
+    color: var(--headerTextColor);
+    padding: 0.2rem 0.2rem;
+    margin: 0 0.5rem;
+    position: relative;
+}
+
+
+.header .select a:hover{
+    text-decoration: none;
+    color: var(--hoverColor);
+}
+
+.header .select a::before{
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border: 0px solid var(--hoverColor);
+    width: 0;
+    transition: 0.5s;
+}
+
+.header .select a:hover::before{
+    width: 100%;
+    border: 1px solid var(--hoverColor);
+
+}
+
+.header .sidebarButton{
+    display: none;
+}
+
+.sidebarButton{
+    position: fixed;
+    top: 5%;
+    right: -1rem;
+    z-index: 100;
+    background-color: var(--buttonBackground);
+    color: white;
+    font-size: 2rem;
+    clip-path: polygon(0 50%, 25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%);
+    padding: 0.5rem 1rem;
+    user-select: none;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.sidebarButton.active{
+    color: var(--buttonBackground);
+}
+
+.sidebarButton::before, .sidebarButton::after{
+    position: absolute;
+    left: -0.5rem;
+    top: 0;
+    content: "";
+    display: block;
+    height: 3px;
+    width: 0;
+    background: var(--WordColor);
+    transition: 0.5s;
+    transform-origin: left;
+
+}
+
+.sidebarButton::before{
+    transform: rotate(45deg);
+}
+
+.sidebarButton::after{
+    transform: rotate(-45deg);
+    top: 100%;
+}
+
+.sidebarButton.active::before, .sidebarButton.active::after{
+    width: 150%;
+}
+
+.sidebar{
+    position: fixed;
+    width: 20vw;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    z-index: 99;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.sidebar.active{
+    visibility: visible;
+}
+
+
+.sidebar .noise{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url("../img/background_texture.png");
+    mix-blend-mode: multiply;
+    opacity: 0.0;
+    transition: 0.5s;
+    transition-delay: 0.1s;
+}
+
+.sidebar.active .noise{
+    opacity: 0.2;
+}
+
+
+.sidebar .background{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar .background span.ver{
+    position: absolute;
+    background: #eaeaea;
+    width: 100%;
+    height: 100%;
+    top: -100%;
+    right: 0;
+    transition: 0.25s;
+    border-left: 1rem solid var(--WordColor_Black);
+}
+
+.sidebar.active .background span.ver{
+    top: 0;
+}

@@ -1,0 +1,63 @@
+
+@media screen and (max-width: 765px){
+    .intro .logo{
+        top: 10vh;
+    }
+
+    .intro .logo::before{
+        width: 0;
+        animation: none;
+    }
+
+    .intro .bar{
+        margin-top: 10vh;
+    }
+
+    .intro .name h1, .intro .name span{
+        font-size: calc(var(--fs) * 0.5);
+    }
+
+    .intro .introMoveBackground{
+        font-size: calc(var(--fs) * 1vh);
+    }
+
+    .introMemberSection .introCharacter{
+        flex-direction: column;
+    }
+
+    .introCharacter .characterText{
+        left: -10%;
+    }
+
+    .introVideoSection .introVideo{
+        width: 100vw;
+        height: 54vw;
+        margin: auto;
+    }
+
+    .header .select{
+        display: none;
+    }
+
+    .header .sidebarButton{
+        display: block;
+        font-weight: bold;
+        margin: auto 1rem;
+        width: 40px;
+        height: 40px;
+    }
+
+    .sidebar{
+        width: 80vw;
+    }
+
+    /*手機板不顯示特殊游標*/
+    .cursorContainer{
+        display: none;
+    }
+    
+    .circleWindow{
+        width: 90%;
+        height: 90%;
+    }
+}

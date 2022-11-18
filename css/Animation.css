@@ -1,0 +1,87 @@
+@keyframes headerSelectHover{
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 100%;
+    }
+}
+
+@keyframes startLogoAnimation {
+    0%{
+        width: 0;
+        height: 50%;
+    }
+
+    45%{
+        width: 100%;
+        height: 50%;
+    }
+
+    65%{
+        width: 100%;
+        height: 50%;
+    }
+
+    100%{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@keyframes startLogoCursorAnimation {
+    0%{
+        top: 0;
+        height: 0;
+    }
+    30%{
+        top: 0;
+        height: 25vh;
+        left: 8vw;
+        transform: rotate(0);
+    }
+    50%{
+        top: 0;
+        left: 80vw;
+        transform: rotate(0);
+        height: 25vh;
+
+    }
+    60%{
+        top: 0;
+        left: 80vw;
+        transform: rotate(90deg);
+        height: 25vh;
+    }
+    85%{
+        left: 80vw;
+        top: 40vh;
+        transform: rotate(90deg);
+        height: 50vh;
+    }
+    100%{
+        left: 80vw;
+        top: 40vh;
+        transform: rotate(90deg);
+        height: 50vh;
+    }
+}
+
+@keyframes rippleAnimation {
+    0%{
+        transform: rotate(var(--r)) scale(1);
+    }
+    100%{
+        opacity: 0;
+        transform: rotate(var(--r)) scale(3);
+    }
+}
+
+@keyframes cursorDotSpin{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
