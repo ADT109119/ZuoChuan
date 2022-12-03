@@ -30,6 +30,32 @@
         </div>
     </section>
 
+    <span id="countryDisplay" class="displayer">
+        <div id="countryDisplayHeader" class="displayerHeader">點此拖動顯示區</div>
+        <h3 class="countryName">國家: 尚未選擇</h3>
+        <p class="eventNum">事件數量: </p>
+    </span>
+
+    <span id="articleDisplay" class="displayer">
+        <div id="articleDisplayHeader" class="displayerHeader">點此拖動顯示區</div>
+        <div class="displayEventInfo">
+            <h3>傳:</h3>
+            <p class="ar">尚未選擇事件</p>
+            
+            <hr>
+
+            <h3>經:</h3>
+            <p class="or">尚未選擇事件</p>
+
+            <hr>
+
+            <h3>事件關聯國家:</h3>
+            <p class="c">尚未選擇事件</p>
+        </div>
+    </span>
+
+
+
     <!--section class="footer py-4 py-md-5 mt-5 bg-light text-secondary">
         <div class="container py-4 py-md-5 px-4 px-md-3">
             <div class="row">
@@ -107,7 +133,45 @@
     <script src="js/bootstrap.js"></script>
     <script>
         loadElement("header", "./header.html");
-        loadElement(".mapContainer", "./img/Blank_Taiwan_map.svg")
+        var mapLoadStatus = loadElement(".mapContainer", "./img/map.svg")
+    </script>
+
+    <script>
+        //顯示資訊
+        //var allSvgDomG = document.querySelectorAll(".mapContainer svg g");
+        var pathHoverEvent = setInterval(async ()=>{
+            document.querySelectorAll(".mapContainer svg g path").forEach((item, i)=>{
+                item.onmouseover = ()=>{
+                    let selectedCountry = document.querySelectorAll(".mapContainer svg g")[i].getAttribute("data-name");
+
+                    let worker = new Worker("js/eventCountryFindWorker.js");
+                    worker.postMessage({
+                        country: selectedCountry
+                    })
+
+                    worker.onmessage = (e)=>{
+                        //console.log(e.data.d)
+                        displayData("#countryDisplay", selectedCountry, e.data.num);
+                        worker.terminate();
+                    }
+
+                    //console.log(document.querySelectorAll(".mapContainer svg g")[i].getAttribute("data-name"));
+                }
+
+                item.onmouseout = ()=>{
+
+                }
+            })
+            if(mapLoadStatus == 200)
+                clearInterval(pathHoverEvent);
+        }, 500)
+        
+    </script>
+
+    <script>
+        //呼叫拖動
+        dragElement(document.querySelector("#countryDisplay"));
+        dragElement(document.querySelector("#articleDisplay"));
     </script>
 
 </body>

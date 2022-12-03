@@ -58,6 +58,7 @@ section{
     top: 0;
     height: 100vh;
     width: 100vw;
+    padding: 2rem;
 }
 
 .mapContainer svg{
@@ -65,13 +66,84 @@ section{
     width: 100%;
 }
 
-.mapContainer svg #county path{
+.mapContainer svg g *{
     transition: 0.2s;
     cursor: pointer;
 }
 
-.mapContainer svg #county path:hover{
+.mapContainer svg g *:hover, .mapContainer svg g *.active{
     fill: red;
+}
+
+.mapContainer svg g[data-name="灰色地帶"] path:hover{
+    fill: none;
+}
+
+.displayer{
+    position: absolute;
+    display: block;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+#countryDisplay{
+    left: 1%;
+    bottom: 30px;
+    width: 15rem;
+    height: 9rem;
+    background: rgba(30, 30, 30, 0.8);
+    /*backdrop-filter: blur(0.1rem);*/
+    color: var(--WordColor);
+}
+
+#articleDisplay{
+    left: 1%;
+    top: 1rem;
+    width: 25rem;
+    height: 15rem;
+    background: rgba(230, 228, 224, 0.9);
+    /*backdrop-filter: blur(0.1rem);*/
+    color: var(--WordColor_Black);
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+
+}
+
+#articleDisplay .displayEventInfo{
+    padding-top: 1rem;
+    overflow-y: scroll;
+    flex: 1;
+}
+
+
+#articleDisplay .displayEventInfo::-webkit-scrollbar{
+    width: 5px;
+    height: 8px;
+}
+
+/* Track */
+#articleDisplay .displayEventInfo::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+/* Handle */
+#articleDisplay .displayEventInfo::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+#articleDisplay .displayEventInfo::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.displayer .displayerHeader{
+    cursor: move;
+    z-index: 10;
+    background-color: #868686;
+    color: #fff;
+    border-radius: 0.5rem;
+    text-align: center;
 }
 
 /*footer*/

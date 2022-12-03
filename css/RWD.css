@@ -21,7 +21,7 @@
         font-size: calc(var(--fs) * 1vh);
     }
 
-    .introMemberSection .introCharacter{
+    .introCharacterSection .introCharacter{
         flex-direction: column;
     }
 
