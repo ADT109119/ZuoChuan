@@ -71,8 +71,17 @@ section{
     cursor: pointer;
 }
 
+.mapContainer svg g[data-name="灰色地帶"] *{
+    cursor: default;
+}
+
 .mapContainer svg g *:hover, .mapContainer svg g *.active{
     fill: red;
+    stroke: red;
+}
+
+.mapContainer svg g *.search{
+    fill: lightskyblue;
 }
 
 .mapContainer svg g[data-name="灰色地帶"] path:hover{
@@ -100,7 +109,7 @@ section{
     left: 1%;
     top: 1rem;
     width: 25rem;
-    height: 15rem;
+    height: 20rem;
     background: rgba(230, 228, 224, 0.9);
     /*backdrop-filter: blur(0.1rem);*/
     color: var(--WordColor_Black);

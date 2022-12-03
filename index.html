@@ -33,12 +33,16 @@
     <span id="countryDisplay" class="displayer">
         <div id="countryDisplayHeader" class="displayerHeader">點此拖動顯示區</div>
         <h3 class="countryName">國家: 尚未選擇</h3>
-        <p class="eventNum">事件數量: </p>
+        <p class="eventNum">事件數量: 0</p>
     </span>
 
     <span id="articleDisplay" class="displayer">
         <div id="articleDisplayHeader" class="displayerHeader">點此拖動顯示區</div>
-        <div class="displayEventInfo">
+        <div id="displayEventInfo" class="displayEventInfo">
+            <h2 class="t">|尚未選擇事件|</h2>
+
+            
+
             <h3>傳:</h3>
             <p class="ar">尚未選擇事件</p>
             
@@ -131,27 +135,64 @@
 
 
     <script src="js/bootstrap.js"></script>
+
     <script>
-        loadElement("header", "./header.html");
-        var mapLoadStatus = loadElement(".mapContainer", "./img/map.svg")
+        var mapLoadStatus = 0;
+
+        async function loadElementAtStart(){
+            loadElement("header", "./header.html");
+            mapLoadStatus = await loadElement(".mapContainer", "./img/map.svg")
+        }
+
+        loadElementAtStart();
+        //loadElement("header", "./header.html");
+        //var mapLoadStatus = loadElement(".mapContainer", "./img/map.svg")
     </script>
 
     <script>
+        
+
+        var eventData;
         //顯示資訊
         //var allSvgDomG = document.querySelectorAll(".mapContainer svg g");
         var pathHoverEvent = setInterval(async ()=>{
             document.querySelectorAll(".mapContainer svg g path").forEach((item, i)=>{
+
+                //按國家時加上active
+                item.onclick = ()=>{
+
+                    document.querySelectorAll(".mapContainer svg g path.active").forEach((activeItem)=>{
+                        activeItem.classList.remove("active");
+                    })
+
+                    item.classList.toggle("search");
+                    
+                    if(item.classList.contains("search")){
+                        sidebarOpen();
+                    }
+
+                    
+
+                    let searchCountry = []
+                    document.querySelectorAll(".mapContainer svg g path.search").forEach((item)=>{
+                        searchCountry.push(item.parentElement.getAttribute("data-name"))
+                    })
+                    sidebarDisplayEvent(searchCountry)
+                }
+
                 item.onmouseover = ()=>{
-                    let selectedCountry = document.querySelectorAll(".mapContainer svg g")[i].getAttribute("data-name");
+                    //let selectedCountry = document.querySelectorAll(".mapContainer svg g")[i].getAttribute("data-name");
+                    let selectedCountry = item.parentElement.getAttribute("data-name");
 
                     let worker = new Worker("js/eventCountryFindWorker.js");
                     worker.postMessage({
-                        country: selectedCountry
+                        country: [selectedCountry],
+                        eventData: eventData
                     })
 
                     worker.onmessage = (e)=>{
                         //console.log(e.data.d)
-                        displayData("#countryDisplay", selectedCountry, e.data.num);
+                        displayData("#countryDisplay", [selectedCountry], e.data.num);
                         worker.terminate();
                     }
 
@@ -159,11 +200,32 @@
                 }
 
                 item.onmouseout = ()=>{
+                    let selectedCountry = []
+                    document.querySelectorAll(".mapContainer svg g *.search").forEach((item)=>{
+                        selectedCountry.push(item.parentElement.getAttribute("data-name"));
+                    })
 
+                    //console.log(selectedCountry)
+
+                    let worker = new Worker("js/eventCountryFindWorker.js");
+                    worker.postMessage({
+                        country: selectedCountry,
+                        eventData: eventData
+                    })
+
+                    worker.onmessage = (e)=>{
+                        //console.log(e.data.d)
+                        displayData("#countryDisplay", selectedCountry, e.data.num);
+                        worker.terminate();
+                    }
                 }
             })
-            if(mapLoadStatus == 200)
+            //eventData = await loadData("./data/events.json")
+            if(mapLoadStatus == 200){
+                eventData = await loadData("./data/events.json")
                 clearInterval(pathHoverEvent);
+            }
+                
         }, 500)
         
     </script>

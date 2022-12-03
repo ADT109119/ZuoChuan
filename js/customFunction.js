@@ -1,6 +1,7 @@
 
+
 async function loadData(dataPath){
-    var re = await fetch(dataPath).then(function(res){
+    var re = await fetch(dataPath, {cache: "no-cache"}).then(function(res){
         return res.text();
     }).then(function(response){
         return JSON.parse(response);
@@ -9,6 +10,8 @@ async function loadData(dataPath){
     //console.log(re)
     return re;
 }
+
+//importScripts("../js/loadData.js");
 
 async function loadElement(selector, target){
 
@@ -39,8 +42,77 @@ function sidebarOpen(){
 //顯示國家資料
 async function displayData(target, country, eventNum){
     let countryDisplayer = document.querySelector(target)
-    countryDisplayer.querySelector("h3.countryName").innerHTML = "國家: " + country;
+    countryDisplayer.querySelector("h3.countryName").innerHTML = "國家: " + country.join(", ");
     countryDisplayer.querySelector("p").innerHTML = "事件數量: " + eventNum;
+
+    if(country.length == 0)
+        countryDisplayer.querySelector("h3.countryName").innerHTML = "國家: 尚未選擇";
+        
+}
+
+//側邊欄加入事件方塊
+function addEventBlock(eventId){
+
+    let block = document.createElement("div");
+    block.className = "eventBlock";
+
+    block.onclick = ()=>{
+        document.querySelector("#displayEventInfo .t").innerHTML = "|" + eventData[eventId]['time'] + "|";
+        document.querySelector("#displayEventInfo .ar").innerHTML = eventData[eventId]['左傳'];
+        document.querySelector("#displayEventInfo .or").innerHTML = eventData[eventId]['春秋經'];
+        document.querySelector("#displayEventInfo .c").innerHTML = eventData[eventId]['relatedCountry'];
+
+        let relatedCountry = eventData[eventId]['relatedCountry'].replace(/ /g, "").split(",")
+
+        document.querySelectorAll(".mapContainer svg g path").forEach((item)=>{
+            item.classList.remove("active");
+
+            if(relatedCountry.includes(item.parentElement.getAttribute("data-name")))
+                item.classList.add("active")
+        })
+    }
+
+    let timeH3 = document.createElement("h3");
+    timeH3.className = "time";
+    timeH3.innerHTML = eventData[eventId]['time']
+
+    let p = document.createElement("p");
+    p.className = "article";
+    p.innerHTML = eventData[eventId]['左傳']
+
+    block.append(timeH3)
+    block.append(p)
+
+    document.querySelector(".eventBlockArea").append(block);
+}
+
+//側邊欄顯示事件
+async function sidebarDisplayEvent(country){
+
+    let worker = new Worker("js/eventCountryFindWorker.js");
+    console.log(country)
+
+    worker.postMessage({
+        country: country,
+        eventData: eventData
+    })
+
+    worker.onmessage = (e)=>{
+        //console.log(e.data.d)
+        let events = e.data.events;
+        console.log(events)
+
+        document.querySelectorAll(".eventBlockArea .eventBlock").forEach((item)=>{
+            item.remove();
+        })
+
+        events.forEach((item)=>{
+            addEventBlock(item);
+        })
+        
+        worker.terminate();
+    }
+
 }
 
 

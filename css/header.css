@@ -141,6 +141,8 @@
     opacity: 0.0;
     transition: 0.5s;
     transition-delay: 0.1s;
+    /*pointer-events: none;*/
+    z-index: 0;
 }
 
 .sidebar.active .noise{
@@ -168,4 +170,37 @@
 
 .sidebar.active .background span.ver{
     top: 0;
+    padding: 1rem;
+    color: var(--WordColor_Black);
+}
+
+.sidebar.active .background span.ver .eventBlockArea{
+    padding: 0.5rem;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.sidebar .background span.ver .eventBlockArea .eventBlock *{
+    display: none;
+}
+
+.sidebar.active .background span.ver .eventBlockArea .eventBlock *{
+    display: inherit;
+}
+
+.sidebar.active .background span.ver .eventBlockArea .eventBlock{
+    padding: 1rem;
+    color: var(--WordColor_Black);
+    background: white;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: 0.25s;
+    margin-bottom: 1rem;
+    z-index: 1;
+}
+
+.sidebar.active .background span.ver .eventBlockArea .eventBlock:hover{
+    background: rgba(240, 240, 240, 1);
 }
