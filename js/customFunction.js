@@ -87,10 +87,25 @@ function addEventBlock(eventId){
 }
 
 //側邊欄顯示事件
+function removeBlocks(){
+    document.querySelectorAll(".eventBlockArea .eventBlock").forEach((item)=>{
+        item.remove();
+    })
+}
+
 async function sidebarDisplayEvent(country){
 
+    if(country.length == 0){
+        removeBlocks();
+        let block = document.createElement("div");
+        block.className = "eventBlock";
+        block.innerHTML = "尚未選擇國家";
+        document.querySelector(".eventBlockArea").append(block);
+        return 0;
+    }
+
     let worker = new Worker("js/eventCountryFindWorker.js");
-    console.log(country)
+    //console.log(country)
 
     worker.postMessage({
         country: country,
@@ -102,9 +117,7 @@ async function sidebarDisplayEvent(country){
         let events = e.data.events;
         console.log(events)
 
-        document.querySelectorAll(".eventBlockArea .eventBlock").forEach((item)=>{
-            item.remove();
-        })
+        removeBlocks()
 
         events.forEach((item)=>{
             addEventBlock(item);
