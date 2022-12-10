@@ -158,12 +158,15 @@
         //顯示資訊
         //var allSvgDomG = document.querySelectorAll(".mapContainer svg g");
         var pathHoverEvent = setInterval(async ()=>{
-            document.querySelectorAll(".mapContainer svg g path").forEach((item, i)=>{
+            document.querySelectorAll(".mapContainer svg g *").forEach((item, i)=>{
+
+                if(item.parentElement.getAttribute("data-name") == "灰色地帶")
+                    return;
 
                 //按國家時加上active
                 item.onclick = ()=>{
 
-                    document.querySelectorAll(".mapContainer svg g path.active").forEach((activeItem)=>{
+                    document.querySelectorAll(".mapContainer svg g *.active").forEach((activeItem)=>{
                         activeItem.classList.remove("active");
                     })
 
@@ -176,7 +179,7 @@
                     
 
                     let searchCountry = []
-                    document.querySelectorAll(".mapContainer svg g path.search").forEach((item)=>{
+                    document.querySelectorAll(".mapContainer svg g *.search").forEach((item)=>{
                         searchCountry.push(item.parentElement.getAttribute("data-name"))
                     })
                     sidebarDisplayEvent(searchCountry)

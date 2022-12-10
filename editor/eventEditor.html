@@ -18,6 +18,16 @@
 </head>
 <body>
 
+    <div id="touchOutsideScanner" onclick="closeCountrySelector()"></div>
+
+    <span id="countrySlectorDisplay" class="displayer">
+        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+        <div id="allCountryDatalist" class="dropdown-content">
+            
+        </div>
+
+    </span>
+
     <div class="backgroundFileter"></div>
 
     <div class="container table-responsive" style="text-align: center;">
@@ -43,10 +53,11 @@
         <button type="button" class="btn btn-dark" onclick="eventDataSave();">💾Save</button>
     </div>
 
-    <script src="js/bootstrap.js"></script>
+    <script src="../js/bootstrap.js"></script>
 
     <script>
         loadEvent('tbody')
+        loadAllCountry()
     </script>
 </body>
 </html>

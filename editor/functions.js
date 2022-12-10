@@ -1,5 +1,68 @@
 
 var biggestID = 0;
+var allCountrys = []
+var nowSelectedEvent;
+
+async function loadAllCountry(){
+    await fetch('../img/map.svg').then(function(res){
+        return res.text();
+    }).then(function(response){
+        let div = document.createElement("div");
+        div.innerHTML = response;
+
+        let c = []
+
+        div.querySelectorAll("svg g").forEach((item)=>{
+
+            if(item.getAttribute("data-name") == "灰色地帶")
+                return
+
+            allCountrys.push(item.getAttribute("data-name"))
+
+        })
+
+        //return JSON.parse(response);
+    })
+
+    addCountryToDatalist()
+    //console.log(allCountrys)
+}
+
+function addCountryToDatalist(){
+    allCountrys.forEach((item)=>{
+
+        let option = document.createElement("div");
+        option.innerHTML = item;
+
+        option.onclick = ()=>{
+            console.log(nowSelectedEvent)
+            nowSelectedEvent.value += ", " + item;
+        }
+
+        document.querySelector("#allCountryDatalist").append(option)
+
+    })
+}
+
+function closeCountrySelector(){
+    document.querySelector("#countrySlectorDisplay").classList.remove("active");
+    document.querySelector("#touchOutsideScanner").classList.remove("active");
+}
+
+function addCountryToRelatedList(e, obj){
+
+    nowSelectedEvent = obj.parentElement.querySelector("input");
+
+    let countrySlectorDisplay = document.querySelector("#countrySlectorDisplay");
+    let touchOutsideScanner = document.querySelector("#touchOutsideScanner");
+
+    touchOutsideScanner.classList.add("active")
+    countrySlectorDisplay.classList.add("active");
+    countrySlectorDisplay.style.left = e.clientX + "px";
+    countrySlectorDisplay.style.top = e.clientY + "px";
+
+    //console.log(obj.parentElement)
+}
 
 async function loadData(dataPath){
     var re = await fetch(dataPath).then(function(res){
@@ -148,6 +211,7 @@ async function loadEvent(selector){
         let tdTransationInput = document.createElement("textarea");
         let tdTimeInput = document.createElement("input");
         let tdRelatedCountrysInput = document.createElement("input");
+        let tdAddRelatedCountrys = document.createElement("a");
 
 
         tdIDInput.value = i;
@@ -157,6 +221,12 @@ async function loadEvent(selector){
         tdTimeInput.value = data[i]['time'];
         tdRelatedCountrysInput.value = data[i]['relatedCountry'];
         deleteButton.innerHTML = '<button type="button" class="btn btn-danger" onclick="deleteCountry(this)">🗑</button>'
+        tdAddRelatedCountrys.innerHTML = "+ 增加關聯國家"
+
+        tdAddRelatedCountrys.href = "javascript:void(0)"
+        tdAddRelatedCountrys.onclick = (e)=>{
+            addCountryToRelatedList(e, tdAddRelatedCountrys)
+        }
 
         tdID.append(tdIDInput)
         tdOr.append(tdOrInput)
@@ -164,6 +234,7 @@ async function loadEvent(selector){
         tdTransation.append(tdTransationInput)
         tdTime.append(tdTimeInput)
         tdRelatedCountrys.append(tdRelatedCountrysInput)
+        tdRelatedCountrys.append(tdAddRelatedCountrys)
 
         tr.append(tdID)
         tr.append(tdOr)
@@ -220,4 +291,21 @@ function CreateAndDownloadData(data, dataName) {
     a.click();
     URL.revokeObjectURL(blob);
 	
+}
+
+function filterFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    div = document.querySelector("#allCountryDatalist");
+    opt = div.querySelectorAll("div");
+
+    for (i = 0; i < opt.length; i++) {
+            txtValue = opt[i].textContent || opt[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            opt[i].style.display = "";
+        } else {
+            opt[i].style.display = "none";
+        }
+    }
 }

@@ -56,11 +56,15 @@ function addEventBlock(eventId){
     let block = document.createElement("div");
     block.className = "eventBlock";
 
+    //事件顯示
     block.onclick = ()=>{
         document.querySelector("#displayEventInfo .t").innerHTML = "|" + eventData[eventId]['time'] + "|";
         document.querySelector("#displayEventInfo .ar").innerHTML = eventData[eventId]['左傳'];
         document.querySelector("#displayEventInfo .or").innerHTML = eventData[eventId]['春秋經'];
         document.querySelector("#displayEventInfo .c").innerHTML = eventData[eventId]['relatedCountry'];
+
+        if(eventData[eventId]['春秋經'] == "")
+        document.querySelector("#displayEventInfo .or").innerHTML = "不書";
 
         let relatedCountry = eventData[eventId]['relatedCountry'].replace(/ /g, "").split(",")
 

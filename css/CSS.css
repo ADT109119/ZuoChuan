@@ -82,9 +82,17 @@ section{
     cursor: default;
 }
 
+.mapContainer svg g[data-name="灰色地帶"] *.search{
+    fill: none;
+}
+
+.mapContainer svg g[data-name="灰色地帶"] *:hover{
+    stroke: #898a89;
+}
+
 .mapContainer svg g *:hover, .mapContainer svg g *.active{
     fill: red;
-    stroke: red;
+    stroke: darkred;
 }
 
 .mapContainer svg g *.search{
@@ -172,4 +180,62 @@ section{
     background: rgba(0, 0, 0, 0.5);
     color: white;
     z-index: 100;
+}
+
+
+/*編輯器加入國家*/
+#countrySlectorDisplay{
+    display: none;
+    left: 1%;
+    top: 30px;
+    width: 15rem;
+    height: 50vh;
+    background: rgba(255, 255, 255, 1);
+    padding: 0;
+    z-index: 100;
+}
+
+#countrySlectorDisplay.active{
+    display: block;
+}
+
+#allCountryDatalist{
+    overflow-y: scroll;
+    height: 100%;
+}
+
+
+#allCountryDatalist div{
+    font-size: 1.5rem;
+    background-color: rgba(220, 220, 220, 1);
+}
+
+#myInput {
+    width: 100%;
+    box-sizing: border-box;
+    background-image: url('../img/searchicon.png');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+#myInput:focus{
+    outline: 3px solid #ddd;
+}
+
+#touchOutsideScanner{
+    display: none;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+#touchOutsideScanner.active{
+    display: block;
 }
