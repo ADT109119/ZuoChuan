@@ -36,7 +36,10 @@ function addCountryToDatalist(){
 
         option.onclick = ()=>{
             console.log(nowSelectedEvent)
-            nowSelectedEvent.value += ", " + item;
+            if(nowSelectedEvent.value == "")
+                nowSelectedEvent.value += item
+            else
+                nowSelectedEvent.value += ", " + item;
         }
 
         document.querySelector("#allCountryDatalist").append(option)
@@ -58,8 +61,8 @@ function addCountryToRelatedList(e, obj){
 
     touchOutsideScanner.classList.add("active")
     countrySlectorDisplay.classList.add("active");
-    countrySlectorDisplay.style.left = e.clientX + "px";
-    countrySlectorDisplay.style.top = e.clientY + "px";
+    countrySlectorDisplay.style.left = e.pageX + "px";
+    countrySlectorDisplay.style.top = e.pageY + "px";
 
     //console.log(obj.parentElement)
 }
@@ -120,9 +123,18 @@ function addNewEvent(){
     let tdTransationInput = document.createElement("textarea");
     let tdTimeInput = document.createElement("input");
     let tdRelatedCountrysInput = document.createElement("input");
+    let tdAddRelatedCountrys = document.createElement("a");
+
+    tdAddRelatedCountrys.innerHTML = "+ 增加關聯國家"
     deleteButton.innerHTML = '<button type="button" class="btn btn-danger" onclick="deleteCountry(this)">🗑</button>'
 
+
     tdIDInput.value = parseInt(parseInt(biggestID) + parseInt(1));
+
+    tdAddRelatedCountrys.href = "javascript:void(0)"
+    tdAddRelatedCountrys.onclick = (e)=>{
+        addCountryToRelatedList(e, tdAddRelatedCountrys)
+    }
 
     tdID.append(tdIDInput)
     tdOr.append(tdOrInput)
@@ -130,6 +142,7 @@ function addNewEvent(){
     tdTransation.append(tdTransationInput)
     tdTime.append(tdTimeInput)
     tdRelatedCountrys.append(tdRelatedCountrysInput)
+    tdRelatedCountrys.append(tdAddRelatedCountrys)
 
     tr.append(tdID)
     tr.append(tdOr)

@@ -208,6 +208,11 @@ section{
 #allCountryDatalist div{
     font-size: 1.5rem;
     background-color: rgba(220, 220, 220, 1);
+    cursor: pointer;
+}
+
+#allCountryDatalist div:hover{
+    background-color: rgba(200, 200, 200, 1);
 }
 
 #myInput {
