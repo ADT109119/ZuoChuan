@@ -33,32 +33,26 @@ self.addEventListener('activate', function(event) {
 
 
 this.addEventListener("message", async function(e){
-  let country = e.data.country;
 
-  let data = await loadData("../data/events.json");
+    let text = e.data.text;
+    text = text.split(" ");
+
+    let data = await loadData("../data/events.json");
   
-  let events = [];
-  //this.postMessage({"d": data});
-  for(i in data){
-    
-    let relatedCountry = data[i]["relatedCountry"].replace(/ /g, "").split(",")
-    //this.postMessage({"d": relatedCountry});
-    let temp = 0;
-    let j = country.some((r)=>{
-      
-        if(relatedCountry.indexOf(r) >= 0){
-            temp++;
+    let events = [];
+    //this.postMessage({"d": data});
+
+    for(var i = 0 ; i < text.length; i++){
+            
+        for(var j in data){
+        
+            if(data[j]["左傳"].includes(text[i]) || data[j]["春秋經"].includes(text[i]) || data[j]["time"].includes(text[i])){
+                events.push(j);
+            }
         }
 
-        if(temp == country.length){
-            return true
-        }
-    })
-
-    if(j /*relatedCountry.includes(country)*/){
-        events.push(i);
     }
-  }
+
 
   this.postMessage({
                         "num": events.length,

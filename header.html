@@ -8,7 +8,14 @@
 
     <div class="background">
         <span class="ver" style="--i:0">
+            
             <h1>事件列表</h1>
+
+            <div id="searchBar" class="input-group">
+                <input id="searchText" type="text" class="form-control" placeholder="輸入想搜尋的事件文本...">
+                <button class="input-group-text btn btn-secondary" onclick="sidebarSearchEvent(document.querySelector('#searchText').value)">搜尋</button>
+            </div>
+
             <hr>
 
             <div class="eventBlockArea">

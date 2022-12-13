@@ -133,6 +133,46 @@ async function sidebarDisplayEvent(country){
 }
 
 
+async function sidebarSearchEvent(text){
+
+    document.querySelectorAll(".mapContainer svg g *.search").forEach((activeItem)=>{
+        activeItem.classList.remove("search");
+    })
+
+    let worker = new Worker("js/searchWorker.js");
+    //console.log(country)
+
+    worker.postMessage({
+        text: text
+    })
+
+    worker.onmessage = (e)=>{
+        //console.log(e.data.d)
+        let events = e.data.events;
+
+        if(e.data.num == 0){
+            removeBlocks();
+            let block = document.createElement("div");
+            block.className = "eventBlock";
+            block.innerHTML = "尚未選擇國家";
+            document.querySelector(".eventBlockArea").append(block);
+            return 0;
+        }
+
+        //console.log(events)
+
+        removeBlocks()
+
+        events.forEach((item)=>{
+            addEventBlock(item);
+        })
+        
+        worker.terminate();
+    }
+
+}
+
+
 //拖動
 function dragElement(elmnt) {
     //console.log(elmnt)

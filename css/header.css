@@ -175,11 +175,13 @@
 }
 
 .sidebar.active .background span.ver .eventBlockArea{
+    position: relative;
     padding: 0.5rem;
     height: 85%;
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
+    z-index: 1;
 }
 
 .sidebar .background span.ver .eventBlockArea .eventBlock *{

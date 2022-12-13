@@ -33,13 +33,13 @@
     </section>
 
     <span id="countryDisplay" class="displayer">
-        <div id="countryDisplayHeader" class="displayerHeader">點此拖動顯示區</div>
+        <div id="countryDisplayHeader" class="displayerHeader">點此拖動顯示區<span class="closeButton">–</span></div>
         <h3 class="countryName">國家: 尚未選擇</h3>
         <p class="eventNum">事件數量: 0</p>
     </span>
 
     <span id="articleDisplay" class="displayer">
-        <div id="articleDisplayHeader" class="displayerHeader">點此拖動顯示區</div>
+        <div id="articleDisplayHeader" class="displayerHeader">點此拖動顯示區<span class="closeButton">–</span></div>
         <div id="displayEventInfo" class="displayEventInfo">
             <h2 class="t">|尚未選擇事件|</h2>
 
@@ -239,6 +239,23 @@
         //呼叫拖動
         dragElement(document.querySelector("#countryDisplay"));
         dragElement(document.querySelector("#articleDisplay"));
+    </script>
+
+    <script>
+        document.querySelectorAll(".displayer").forEach((item)=>{
+            item.onclick = (e)=>{
+                if(e.target.className != "closeButton")
+                    item.classList.remove("close");
+            }
+        })
+
+        //縮小資訊顯示窗
+        document.querySelectorAll(".displayerHeader .closeButton").forEach((item)=>{
+            item.onclick = ()=>{
+                item.parentElement.parentElement.classList.add("close");
+            }
+        })
+        
     </script>
 
 </body>
