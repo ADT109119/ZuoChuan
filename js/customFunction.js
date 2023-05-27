@@ -224,3 +224,58 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
+
+function activeMapDrag(){
+    // 獲取SVG圖片和容器// 獲取SVG圖片和容器
+    const svg = document.querySelector('svg');
+    const container = svg.parentElement;
+
+    // 設置SVG圖片的初始位置和縮放比例
+    let posX = 0;
+    let posY = 0;
+    let scale = 1;
+
+    // 記錄拖曳的起始位置
+    let startX = 0;
+    let startY = 0;
+
+    // 設置拖曳事件
+    container.addEventListener('mousedown', function(e) {
+    startX = e.clientX - posX;
+    startY = e.clientY - posY;
+
+    container.addEventListener('mousemove', onMouseMove);
+    });
+
+    container.addEventListener('mouseup', function() {
+    container.removeEventListener('mousemove', onMouseMove);
+    });
+
+    function onMouseMove(e) {
+    posX = e.clientX - startX;
+    posY = e.clientY - startY;
+
+    svg.setAttribute('transform', `translate(${posX}, ${posY}) scale(${scale})`);
+    }
+
+    // 設置縮放事件
+    container.addEventListener('wheel', function(e) {
+    e.preventDefault();
+
+    const delta = Math.sign(-e.deltaY);
+    const factor = 0.1;
+
+    scale += delta * factor;
+
+    // 限制縮放比例的最小值和最大值
+    if (scale < 0.5) {
+        scale = 0.5;
+    }
+
+    if (scale > 3){
+        scale = 3;
+    }
+
+    svg.setAttribute('transform', `translate(${posX}, ${posY}) scale(${scale})`);
+    })
+}

@@ -38,8 +38,8 @@ this.addEventListener("message", async function(e){
             }
         })
 
-        if(j /*relatedCountry.includes(country)*/){
-            events.push(i);
+        if(j){
+            events.push(i)
         }
     }
 
