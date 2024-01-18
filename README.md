@@ -1,36 +1,48 @@
 # ZuoChuan
-
 此網頁為臺中教育大學 通識課程 經典的智慧 期末作業
-
-網頁功能為利用左傳的段落，查詢該段落相關聯的國家
-
-亦或是選取一個或多個國家，顯示選取國家有參與的事件
 
 GitHub Pages網址:
 
 [https://adt109119.github.io/ZuoChuan/](https://adt109119.github.io/ZuoChuan/)
 
-
-## 網頁介紹
-
-![網頁介面](https://user-images.githubusercontent.com/106337749/209441048-cba5a8c8-77d5-4a46-a49f-542f640a797f.png)
-
-▲網頁介面
+![網頁介面](https://github.com/ADT109119/ZuoChuan/assets/106337749/375b3e1a-994c-4398-b4e2-e606ddfa93f2)
 
 
-![游標移至國家上可顯示國家名稱以及關聯事件數量](https://user-images.githubusercontent.com/106337749/209441288-edf891e3-d5ec-4484-a6da-69bc9675d330.png)
+## 專案用途
 
-▲游標移至國家上可顯示國家名稱以及關聯事件數量
+網頁功能為利用左傳的段落，查詢該段落相關聯的國家
 
-![點擊國家將國家選取，右側會顯示事件列表](https://user-images.githubusercontent.com/106337749/209441338-926ca11f-ab63-4bf3-a49e-a06a44677548.png)
-![可選多個國家](https://user-images.githubusercontent.com/106337749/209441667-a221e1b9-92b1-4e58-8045-fc87b2debbc6.png)
+亦或是選取一個或多個國家，顯示選取國家有參與的事件
 
-▲點擊國家將國家選取，右側會顯示事件列表(可選多個國家)
+## 目前專案功能及進度
 
-![搜尋功能](https://user-images.githubusercontent.com/106337749/209441836-0e5de2f5-a88a-43d9-a81e-7b041cad7130.png)
+目前支援以下幾種功能
+- [x] 游標hover可顯示國家名稱及其相關事件數量
+- [x] 多選國家查詢相關事件
+- [x] 點選事件顯示顯示相關國家
+- [x] 查詢左傳內文
+- [ ] 加入更多章節(目前僅到僖公)
 
-▲可以搜尋左傳、春秋段落內容以及年代
+## 畫面
 
-![點擊列表中的事件框，左上方的將會顯示事件的左傳、春秋對應段落，以及關聯國家](https://user-images.githubusercontent.com/106337749/209442384-f970ca3d-c3a7-4f22-bd83-f82300874158.png)
+> 操作示意  
+> 游標移至國家上顯示國家名稱以及關聯事件數量>選取國家右側會顯示事件列表(可選多個國家)>搜尋左傳、春秋段落內容以及年代
 
-▲點擊列表中的事件框，左上方的將會顯示事件的左傳、春秋對應段落，以及關聯國家
+![image](https://github.com/ADT109119/ZuoChuan/assets/106337749/aef36cfc-19b1-4800-a6dd-529dcf52a6d1)
+![image](https://github.com/ADT109119/ZuoChuan/assets/106337749/bb6385b7-eb4b-4391-8268-c4b2909d795e)
+![image](https://github.com/ADT109119/ZuoChuan/assets/106337749/1419deea-a67d-49bc-beb4-6ac0c86c9484)
+
+## 專案技術
+
+- HTML
+- CSS
+- JavaScript
+- Bootstrap
+- Web Worker
+
+## 聯絡作者
+
+你可以透過以下方式與我聯絡
+
+- [Email: 2.jerry32262686@gmail.com](mailto:2.jerry32262686@gmail.com)
+...
